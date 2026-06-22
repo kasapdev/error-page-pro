@@ -1,0 +1,157 @@
+/* =====================================================================
+   Error Page Builder Pro — app.css
+   App-specific layout on top of the shared base.css design system.
+   ===================================================================== */
+
+/* ----- Theme toggle icon swap (sun in dark, moon in light) ----- */
+[data-theme-toggle] .i-moon { display: none; }
+[data-theme="light"] [data-theme-toggle] .i-sun { display: none; }
+[data-theme="light"] [data-theme-toggle] .i-moon { display: block; }
+
+.brand .sub { display: block; }
+
+/* =====================================================================
+   Workspace: editor (left) + preview (right)
+   ===================================================================== */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+  padding-bottom: var(--space-10);
+}
+
+/* Editor panel becomes a sticky-ish scroll column on desktop */
+.editor {
+  position: sticky;
+  top: 84px;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ed-block { display: flex; flex-direction: column; gap: var(--space-3); }
+.ed-h { margin: 0; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); font-weight: 700; }
+.editor hr { margin: var(--space-2) 0; }
+
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.toggle-row { font-size: 14px; font-weight: 500; color: var(--text); }
+
+/* Color inputs */
+input[type=color] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 40px; padding: 4px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-md); cursor: pointer;
+  transition: border-color var(--dur-1), box-shadow var(--dur-1);
+}
+input[type=color]:hover { border-color: var(--border-strong); }
+input[type=color]:focus-visible { outline: none; border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(99,102,241,.18); }
+input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type=color]::-webkit-color-swatch { border: none; border-radius: 8px; }
+input[type=color]::-moz-color-swatch { border: none; border-radius: 8px; }
+.color-grid label { font-size: 12px; }
+
+.quick-presets .btn { flex: 1; min-width: 64px; }
+
+/* Deploy tips */
+.deploy-tips {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+}
+.deploy-tips summary {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text);
+  list-style: none; user-select: none;
+}
+.deploy-tips summary::-webkit-details-marker { display: none; }
+.deploy-tips summary svg { width: 16px; height: 16px; color: var(--brand-400); }
+.deploy-tips[open] summary { border-bottom: 1px solid var(--border); }
+.deploy-body { padding: var(--space-3) var(--space-4) var(--space-4); font-size: 13.5px; }
+.deploy-body ul { margin: 0 0 var(--space-3); padding-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+.deploy-body code { background: var(--surface-3); padding: 1px 6px; border-radius: 6px; font-size: 12px; }
+.deploy-body p { margin: 0 0 var(--space-3); }
+.deploy-body p:last-child { margin: 0; }
+
+/* =====================================================================
+   Browser-frame preview
+   ===================================================================== */
+.preview-pane { display: flex; flex-direction: column; gap: var(--space-3); position: sticky; top: 84px; }
+
+.browser-frame {
+  overflow: hidden;
+  padding: 0;
+  box-shadow: var(--shadow-lg);
+}
+.browser-bar {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.traffic { display: inline-flex; gap: 7px; flex: none; }
+.traffic i { width: 12px; height: 12px; border-radius: 50%; background: var(--border-strong); }
+.traffic i:nth-child(1) { background: #ff5f57; }
+.traffic i:nth-child(2) { background: #febc2e; }
+.traffic i:nth-child(3) { background: #28c840; }
+.url-bar {
+  flex: 1; min-width: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-full); padding: 6px 14px;
+  font-size: 12.5px; color: var(--text-secondary);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.frame-actions { flex: none; }
+.refresh-btn { width: 32px; height: 32px; }
+.refresh-btn svg { width: 15px; height: 15px; }
+
+#previewFrame {
+  display: block; width: 100%;
+  height: clamp(520px, calc(100vh - 220px), 760px);
+  border: 0; background: #0b1020;
+}
+.preview-hint { margin: 0; font-size: 12.5px; }
+
+/* =====================================================================
+   Shortcuts modal table
+   ===================================================================== */
+.sc-table { width: 100%; border-collapse: collapse; }
+.sc-table td { padding: 10px 4px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.sc-table tr:last-child td { border-bottom: none; }
+.sc-table td:last-child { text-align: right; white-space: nowrap; }
+.sc-table kbd + kbd { margin-left: 4px; }
+
+/* =====================================================================
+   Mobile Edit/Preview toggle visibility
+   ===================================================================== */
+.hide-lg { display: none; }
+
+@media (max-width: 940px) {
+  .workspace { grid-template-columns: 1fr; }
+  .editor {
+    position: static; max-height: none; overflow: visible;
+    top: auto;
+  }
+  .preview-pane { position: static; top: auto; }
+  .hide-lg { display: inline-flex; }
+
+  /* In mobile, only one pane shows at a time */
+  .workspace[data-view="edit"] .preview-pane { display: none; }
+  .workspace[data-view="preview"] .editor { display: none; }
+
+  #previewFrame { height: clamp(480px, 70vh, 680px); }
+}
+
+@media (max-width: 480px) {
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .color-grid .field:last-child { grid-column: 1 / -1; }
+  .brand .sub { display: none; }
+}

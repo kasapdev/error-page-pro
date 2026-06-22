@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Design and export gorgeous standalone error pages — 404, 403, 500, 503, maintenance and custom — with a live preview and one-click HTML export.">
+  <title>Error Page Builder Pro</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="container">
+    <!-- ============================ Top bar ============================ -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">
+          <!-- triangle alert icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </span>
+        <span>
+          Error Page Builder <span class="gradient-text">Pro</span>
+          <span class="sub hide-sm">Design &amp; export beautiful error pages</span>
+        </span>
+      </div>
+
+      <div class="spacer"></div>
+
+      <!-- Mobile Edit/Preview toggle -->
+      <div class="segmented view-toggle hide-lg" role="tablist" aria-label="Editor and preview">
+        <button type="button" data-view="edit" aria-selected="true" role="tab">Edit</button>
+        <button type="button" data-view="preview" aria-selected="false" role="tab">Preview</button>
+      </div>
+
+      <button class="btn btn--primary btn--sm" id="exportBtn" title="Export standalone HTML (Ctrl/Cmd+E)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="hide-sm">Export</span>
+      </button>
+
+      <button class="btn btn--icon" data-shortcut-help title="Keyboard shortcuts" aria-label="Keyboard shortcuts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+      </button>
+
+      <button class="btn btn--icon" data-theme-toggle title="Toggle theme" aria-label="Toggle dark and light theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </header>
+
+    <!-- ============================ Workspace ============================ -->
+    <main class="workspace" id="workspace">
+      <!-- ----------------------- Editor column ----------------------- -->
+      <section class="editor panel" id="editorPane" aria-label="Error page editor">
+        <!-- Presets -->
+        <div class="ed-block fade-in">
+          <div class="row between center">
+            <h2 class="ed-h">Preset</h2>
+            <span class="badge" id="presetBadge">404</span>
+          </div>
+          <div class="field">
+            <label for="presetSel">Error type</label>
+            <select id="presetSel" aria-label="Error type preset">
+              <option value="404">404 — Not Found</option>
+              <option value="403">403 — Forbidden</option>
+              <option value="500">500 — Server Error</option>
+              <option value="503">503 — Service Unavailable</option>
+              <option value="maintenance">Maintenance Mode</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="row wrap gap-2 quick-presets">
+            <button class="btn btn--sm" type="button" data-quick="404">404</button>
+            <button class="btn btn--sm" type="button" data-quick="500">500</button>
+            <button class="btn btn--sm" type="button" data-quick="503">503</button>
+            <button class="btn btn--sm" type="button" data-quick="maintenance">Maintenance</button>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Content -->
+        <div class="ed-block">
+          <h2 class="ed-h">Content</h2>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="codeInp">Error code</label>
+              <input type="text" id="codeInp" maxlength="24" placeholder="404" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="emojiInp">Emoji / glyph</label>
+              <input type="text" id="emojiInp" maxlength="8" placeholder="🛰️" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label for="titleInp">Title</label>
+            <input type="text" id="titleInp" maxlength="80" placeholder="Page not found" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="msgInp">Message</label>
+            <textarea id="msgInp" rows="3" maxlength="320" placeholder="The page you’re looking for doesn’t exist or has moved."></textarea>
+          </div>
+          <div class="field">
+            <label for="footerInp">Footer text</label>
+            <input type="text" id="footerInp" maxlength="120" placeholder="© Acme, Inc. — All rights reserved." autocomplete="off">
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Actions -->
+        <div class="ed-block">
+          <h2 class="ed-h">Buttons &amp; links</h2>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="btnLabelInp">Primary button label</label>
+              <input type="text" id="btnLabelInp" maxlength="40" placeholder="Back to home" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="btnUrlInp">Primary button URL</label>
+              <input type="text" id="btnUrlInp" maxlength="200" placeholder="/" autocomplete="off">
+            </div>
+          </div>
+          <label class="check toggle-row">
+            <span class="switch"><input type="checkbox" id="secToggle"><span class="track"></span><span class="thumb"></span></span>
+            <span>Show secondary link</span>
+          </label>
+          <div class="grid grid-2" id="secFields" hidden>
+            <div class="field">
+              <label for="secLabelInp">Secondary label</label>
+              <input type="text" id="secLabelInp" maxlength="40" placeholder="Contact support" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="secUrlInp">Secondary URL</label>
+              <input type="text" id="secUrlInp" maxlength="200" placeholder="/support" autocomplete="off">
+            </div>
+          </div>
+          <label class="check toggle-row">
+            <span class="switch"><input type="checkbox" id="searchToggle"><span class="track"></span><span class="thumb"></span></span>
+            <span>Show decorative search box</span>
+          </label>
+        </div>
+
+        <hr>
+
+        <!-- Style -->
+        <div class="ed-block">
+          <h2 class="ed-h">Illustration &amp; style</h2>
+          <div class="field">
+            <label for="illusSel">Illustration style</label>
+            <select id="illusSel">
+              <option value="svg">Animated SVG glyph</option>
+              <option value="number">Big gradient number</option>
+              <option value="emoji">Emoji</option>
+              <option value="glitch">Glitch text effect</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bgSel">Background style</label>
+            <select id="bgSel">
+              <option value="gradient">Gradient</option>
+              <option value="mesh">Mesh</option>
+              <option value="solid">Solid</option>
+              <option value="starfield">Starfield</option>
+            </select>
+          </div>
+          <div class="grid grid-3 color-grid">
+            <div class="field">
+              <label for="accentInp">Accent</label>
+              <input type="color" id="accentInp" value="#6366f1" aria-label="Accent color">
+            </div>
+            <div class="field">
+              <label for="bg1Inp">Background 1</label>
+              <input type="color" id="bg1Inp" value="#0b1020" aria-label="Background color 1">
+            </div>
+            <div class="field">
+              <label for="bg2Inp">Background 2</label>
+              <input type="color" id="bg2Inp" value="#1e1b4b" aria-label="Background color 2">
+            </div>
+          </div>
+          <label class="check toggle-row">
+            <span class="switch"><input type="checkbox" id="darkToggle" checked><span class="track"></span><span class="thumb"></span></span>
+            <span>Dark page (light text)</span>
+          </label>
+        </div>
+
+        <hr>
+
+        <!-- Tools -->
+        <div class="ed-block">
+          <div class="row wrap gap-2">
+            <button class="btn btn--sm" type="button" id="exampleBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Load example
+            </button>
+            <button class="btn btn--sm" type="button" id="copyBtn" title="Copy HTML (Ctrl/Cmd+Shift+C)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy HTML
+            </button>
+            <button class="btn btn--sm btn--danger" type="button" id="resetBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Deploy tips -->
+        <details class="deploy-tips">
+          <summary>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            Deploy tips
+          </summary>
+          <div class="deploy-body secondary">
+            <p>Your exported file is fully standalone — drop it anywhere static files are served.</p>
+            <ul>
+              <li><strong>GitHub Pages:</strong> add <code class="mono">404.html</code> to the repo root. It auto-serves on any missing path.</li>
+              <li><strong>Netlify:</strong> place <code class="mono">404.html</code> in your publish directory, or set <code class="mono">[[redirects]]</code> for custom statuses.</li>
+              <li><strong>Vercel:</strong> add <code class="mono">404.html</code> / <code class="mono">500.html</code> at the output root.</li>
+              <li><strong>nginx:</strong> <code class="mono">error_page 404 /404.html;</code> then a matching <code class="mono">location</code> block.</li>
+              <li><strong>Apache:</strong> <code class="mono">ErrorDocument 404 /404.html</code> in <code class="mono">.htaccess</code>.</li>
+            </ul>
+            <p class="muted">Informational only — nothing is uploaded anywhere.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ----------------------- Preview column ----------------------- -->
+      <section class="preview-pane" id="previewPane" aria-label="Live preview">
+        <div class="browser-frame glass rise">
+          <div class="browser-bar">
+            <span class="traffic"><i></i><i></i><i></i></span>
+            <span class="url-bar mono" id="urlBar">example.com/missing-page</span>
+            <span class="frame-actions">
+              <button class="btn btn--icon btn--sm refresh-btn" type="button" id="refreshBtn" title="Re-render preview" aria-label="Re-render preview">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              </button>
+            </span>
+          </div>
+          <iframe id="previewFrame" title="Error page preview" sandbox="allow-scripts"></iframe>
+        </div>
+        <p class="preview-hint muted text-c">Live preview — updates as you type. Buttons are non-clickable here; they work in the exported file.</p>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      Built with the Web Utility Suite design system · No frameworks, no network calls · <a href="https://kasapdev.github.io/error-page-pro/" target="_blank" rel="noopener">GitHub Pages</a>
+    </footer>
+  </div>
+
+  <!-- ============================ Shortcuts modal ============================ -->
+  <div class="modal-backdrop" id="helpModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+      <div class="row between center" style="margin-bottom:var(--space-4)">
+        <h2 id="helpTitle" style="margin:0">Keyboard shortcuts</h2>
+        <button class="btn btn--icon btn--sm" id="helpClose" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <table class="sc-table">
+        <tbody id="shortcutRows"></tbody>
+      </table>
+      <p class="muted" style="margin:var(--space-4) 0 0;font-size:13px">Press <kbd>?</kbd> anytime to open this dialog.</p>
+    </div>
+  </div>
+
+  <!-- ============================ Reset confirm modal ============================ -->
+  <div class="modal-backdrop" id="resetModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+      <h2 id="resetTitle" style="margin:0 0 var(--space-2)">Reset everything?</h2>
+      <p class="secondary" style="margin:0 0 var(--space-6)">This clears your current design and restores the default 404 template. This can’t be undone.</p>
+      <div class="row gap-3" style="justify-content:flex-end">
+        <button class="btn" id="resetCancel" type="button">Cancel</button>
+        <button class="btn btn--danger" id="resetConfirm" type="button">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
