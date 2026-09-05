@@ -76,3 +76,9 @@ _Screenshots coming soon._
 ## License
 
 MIT © Error Page Builder Pro contributors. See [LICENSE](LICENSE) for details.
+
+---
+
+## Part of the kasapdev Tools Suite
+
+One of 45+ zero-dependency vanilla JS tools, all free and open source — [see the full list](https://github.com/kasapdev/kasapdev).
