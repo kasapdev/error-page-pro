@@ -109,6 +109,25 @@ input[type=color]::-moz-color-swatch { border: none; border-radius: 8px; }
   font-size: 12.5px; color: var(--text-secondary);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+/* The URL bar is an editable <input>; override the generic form-control
+   styles from base.css (which win on specificity for input[type=text])
+   so it keeps its compact pill look instead of a full-size text field. */
+input.url-bar {
+  width: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px; font-weight: 500; line-height: 1.4;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+input.url-bar:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.18);
+  background: var(--surface-2);
+  color: var(--text);
+}
 .frame-actions { flex: none; }
 .refresh-btn { width: 32px; height: 32px; }
 .refresh-btn svg { width: 15px; height: 15px; }

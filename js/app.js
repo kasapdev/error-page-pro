@@ -33,7 +33,8 @@
     ['accentInp', 'accent', 'text'],
     ['bg1Inp', 'bg1', 'text'],
     ['bg2Inp', 'bg2', 'text'],
-    ['darkToggle', 'dark', 'bool']
+    ['darkToggle', 'dark', 'bool'],
+    ['urlBar', 'url', 'text']
   ];
 
   var $ = function (id) { return document.getElementById(id); };
@@ -76,8 +77,6 @@
     if (secFields) secFields.hidden = !state.secEnabled;
     var badge = $('presetBadge');
     if (badge) badge.textContent = state.code || '—';
-    var urlBar = $('urlBar');
-    if (urlBar) urlBar.textContent = state.url || 'example.com';
   }
 
   /* ------------------------- Rendering -------------------------- */
